@@ -4,40 +4,45 @@ var sW = {
 
     //Yoda Attributes
     yoda_name: " Yoda ",
-    yoda_hp: 130,
-    yoda_attack: 6,
+    yoda_hp: 95,
+    yoda_attack: 4,
+    yoda_counter: 4.5,
     yoda_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/yoda.gif\">",
     yoda_hero: false,
     yoda_villain: false,
 
     //Rey Attributes
     rey_name: " Rey ",
-    rey_hp: 74,
-    rey_attack: 4,
+    rey_hp: 86,
+    rey_attack: 3,
+    rey_counter: 9.5,
     rey_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/rey.png\">",
     rey_hero: false,
     rey_villain: false,
 
     //Obi-Wan Kenobi Attributes
     obi_name: " Obi Wan Kenobi ",
-    obi_hp: 83,
+    obi_hp: 88,
     obi_attack: 4,
+    obi_counter: 4,
     obi_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/obi-wan.gif\">",
     obi_hero: false,
     obi_villain: false,
 
     //Kylo Ren Attributes
     kylo_name: " Kylo Ren ",
-    kylo_hp: 92,
-    kylo_attack: 5,
+    kylo_hp: 94,
+    kylo_attack: 4.5,
+    kylo_counter: 6.5,
     kylo_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/kylo-ren.png\">",
     kylo_hero: false,
     kylo_villain: false,
 
     //Darth Vader Attributes
     vader_name: " Darth Vader ",
-    vader_hp: 103,
-    vader_attack: 7,
+    vader_hp: 90,
+    vader_attack: 5,
+    vader_counter: 8,
     vader_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/darth-vader.gif\">",
     vader_hero: false,
     vader_villain: false,
@@ -51,6 +56,8 @@ var sW = {
     attack_increment: [],
 
     attack_array: [],
+
+    counter_array: [],
 
     character_array: [],
 
@@ -93,6 +100,9 @@ var sW = {
         //Fill the Attack Increment array for later use
         this.attack_increment.push(this.yoda_attack, this.rey_attack, this.obi_attack, this.kylo_attack, this.vader_attack)
         console.log(this.attack_array);
+
+        //Fill the Counter Attack array for later use
+        this.counter_array.push(this.yoda_counter, this.rey_counter, this.obi_counter, this.kylo_counter, this.vader_counter);
     },
 
     //Hero functions run the logic on the selection of the user's player, marking that player as the hero.
@@ -223,14 +233,13 @@ var sW = {
     },
 
     attack: function() {
-        //The first half of the attack subracts your attack from the villain's life, doubles your attack power, and reports the results
+        //The first half of the attack subracts your attack from the villain's life, and reports the results
         this.hp_array[this.villain_array.indexOf(true)] = this.hp_array[this.villain_array.indexOf(true)] - this.attack_array[this.hero_array.indexOf(true)];
-        this.attack_array[this.hero_array.indexOf(true)] = this.attack_array[this.hero_array.indexOf(true)] + this.attack_increment[this.hero_array.indexOf(true)];
         $("#statistics1").text("You hit " + this.character_array[this.villain_array.indexOf(true)] + " for " + this.attack_array[this.hero_array.indexOf(true)] + " points!")
 
         //The second half of the attack subtracts the villain's attack from your life, and reports the results
-        this.hp_array[this.hero_array.indexOf(true)] = this.hp_array[this.hero_array.indexOf(true)] - this.attack_array[this.villain_array.indexOf(true)];
-        $("#statistics2").text("You got hit by " + this.character_array[this.villain_array.indexOf(true)] + " for " + this.attack_array[this.villain_array.indexOf(true)] + " points!")
+        this.hp_array[this.hero_array.indexOf(true)] = this.hp_array[this.hero_array.indexOf(true)] - this.counter_array[this.villain_array.indexOf(true)];
+        $("#statistics2").text("You got hit by " + this.character_array[this.villain_array.indexOf(true)] + " for " + this.counter_array[this.villain_array.indexOf(true)] + " points!")
 
         // update the health and attack stats of the character cards
         this.yoda_hp = this.hp_array[0];
@@ -260,11 +269,10 @@ var sW = {
             $("#attack").slideUp("slow");
             $("#winText").text("You were defeated! Press restart to play again.");
             $("#statistics1, #statistics2").text("");
-        }
 
-        //What happens if the villain dies
+            //What happens if the villain dies
 
-        if ( this.hp_array[this.villain_array.indexOf(true)] <= 0 ) {
+        } else if ( this.hp_array[this.villain_array.indexOf(true)] <= 0 ) {
 
             if ( this.villain_array.indexOf(true) == 0 ) {
                 $("#yoda").slideUp("slow");
@@ -323,36 +331,40 @@ var sW = {
             }
         }
 
+    
+        //This increases your attack power.
+        this.attack_array[this.hero_array.indexOf(true)] = this.attack_array[this.hero_array.indexOf(true)] + this.attack_increment[this.hero_array.indexOf(true)];
+
     },
 
     resetGame: function() {
         //Yoda Attributes
-        this.yoda_hp = 130;
-        this.yoda_attack = 6;
+        this.yoda_hp = 95;
+        this.yoda_attack = 4;
         this.yoda_hero = false;
         this.yoda_villain = false;
 
         //Rey Attributes
-        this.rey_hp = 74;
-        this.rey_attack= 4;
+        this.rey_hp = 86;
+        this.rey_attack= 3;
         this.rey_hero = false;
         this.rey_villain = false;
 
         //Obi-Wan Kenobi Attributes
-        this.obi_hp = 83;
+        this.obi_hp = 88;
         this.obi_attack = 4;
         this.obi_hero = false;
         this.obi_villain = false;
 
         //Kylo Ren Attributes
-        this.kylo_hp = 92;
-        this.kylo_attack = 5;
+        this.kylo_hp = 94;
+        this.kylo_attack = 4.5;
         this.kylo_hero = false;
         this.kylo_villain = false;
 
         //Darth Vader Attributes
-        this.vader_hp = 103;
-        this.vader_attack = 8;
+        this.vader_hp = 100;
+        this.vader_attack = 5;
         this.vader_hero = false;
         this.vader_villain = false;
 
