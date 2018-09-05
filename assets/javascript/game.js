@@ -4,10 +4,10 @@ var sW = {
 
     //Yoda Attributes
     yoda_name: " Yoda ",
-    yoda_hp: 95,
+    yoda_hp: 98,
     yoda_attack: 4,
     yoda_counter: 4.5,
-    yoda_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/yoda.gif\">",
+    yoda_image: "<img class=\"char_img\" id=\"yoda_img\" src=\"../star-wars-game/assets/images/yoda.gif\">",
     yoda_hero: false,
     yoda_villain: false,
 
@@ -15,7 +15,7 @@ var sW = {
     rey_name: " Rey ",
     rey_hp: 86,
     rey_attack: 3,
-    rey_counter: 9.5,
+    rey_counter: 10,
     rey_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/rey.png\">",
     rey_hero: false,
     rey_villain: false,
@@ -25,16 +25,16 @@ var sW = {
     obi_hp: 88,
     obi_attack: 4,
     obi_counter: 4,
-    obi_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/obi-wan.gif\">",
+    obi_image: "<img class=\"char_img\" id=\"obi_img\" src=\"../star-wars-game/assets/images/obi-wan.gif\">",
     obi_hero: false,
     obi_villain: false,
 
     //Kylo Ren Attributes
     kylo_name: " Kylo Ren ",
-    kylo_hp: 94,
+    kylo_hp: 96,
     kylo_attack: 4.5,
     kylo_counter: 6.5,
-    kylo_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/kylo-ren.png\">",
+    kylo_image: "<img class=\"char_img\" id=\"kylo_img\" src=\"../star-wars-game/assets/images/kylo-ren.png\">",
     kylo_hero: false,
     kylo_villain: false,
 
@@ -43,7 +43,7 @@ var sW = {
     vader_hp: 90,
     vader_attack: 5,
     vader_counter: 8,
-    vader_image: "<img class=\"char_img\" src=\"../star-wars-game/assets/images/darth-vader.gif\">",
+    vader_image: "<img class=\"char_img\" id=\"vader_img\" src=\"../star-wars-game/assets/images/darth-vader.gif\">",
     vader_hero: false,
     vader_villain: false,
 
@@ -69,23 +69,23 @@ var sW = {
 
         //Yoda Character Button (Note that "On the fly" buttons caused problems in later steps, so they are deactivated here).
         // $("#choose-character").append("<button id=\"yoda\">");
-        $("#yoda").append(this.yoda_name, this.yoda_image, this.yoda_hp);
+        $("#yoda").append(this.yoda_name, this.yoda_image, "HP " + this.yoda_hp);
 
         //Rey Character Button
         // $("#choose-character").append("<button id=\"rey\">");
-        $("#rey").append(this.rey_name, this.rey_image, this.rey_hp);
+        $("#rey").append(this.rey_name, this.rey_image,  "HP " + this.rey_hp);
 
         //Obi-Wan Kenobi Character Button
         // $("#choose-character").append("<button id=\"obi_wan\">");
-        $("#obi_wan").append(this.obi_name, this.obi_image, this.obi_hp);
+        $("#obi_wan").append(this.obi_name, this.obi_image, "HP " + this.obi_hp);
 
         //Kylo Ren Chacter Button
         // $("#choose-character").append("<button id=\"kylo_ren\">");
-        $("#kylo_ren").append(this.kylo_name, this.kylo_image, this.kylo_hp);
+        $("#kylo_ren").append(this.kylo_name, this.kylo_image, "HP " + this.kylo_hp);
 
         //Darth Vader Character Button
         // $("#choose-character").append("<button id=\"darth_vader\">");
-        $("#darth_vader").append(this.vader_name, this.vader_image, this.vader_hp);
+        $("#darth_vader").append(this.vader_name, this.vader_image, "HP " + this.vader_hp);
 
         //Fill the character array for later use
         this.character_array.push(this.yoda_name, this.rey_name, this.obi_name, this.kylo_name, this.vader_name)
@@ -233,6 +233,8 @@ var sW = {
     },
 
     attack: function() {
+        $("html, body").animate({scrollTop:500}, "slow");
+
         //The first half of the attack subracts your attack from the villain's life, and reports the results
         this.hp_array[this.villain_array.indexOf(true)] = this.hp_array[this.villain_array.indexOf(true)] - this.attack_array[this.hero_array.indexOf(true)];
         $("#statistics1").text("You hit " + this.character_array[this.villain_array.indexOf(true)] + " for " + this.attack_array[this.hero_array.indexOf(true)] + " points!")
@@ -257,11 +259,11 @@ var sW = {
         this.vader_hp = this.hp_array[4];
         this.vader_attack = this.attack_array[4];
 
-        $("#yoda").empty().append(this.yoda_name, this.yoda_image, this.yoda_hp);
-        $("#rey").empty().append(this.rey_name, this.rey_image, this.rey_hp);
-        $("#obi_wan").empty().append(this.obi_name, this.obi_image, this.obi_hp);
-        $("#kylo_ren").empty().append(this.kylo_name, this.kylo_image, this.kylo_hp);
-        $("#darth_vader").empty().append(this.vader_name, this.vader_image, this.vader_hp);
+        $("#yoda").empty().append(this.yoda_name, this.yoda_image, "HP " + Math.abs(this.yoda_hp));
+        $("#rey").empty().append(this.rey_name, this.rey_image, "HP " + Math.abs(this.rey_hp));
+        $("#obi_wan").empty().append(this.obi_name, this.obi_image, "HP " + Math.abs(this.obi_hp));
+        $("#kylo_ren").empty().append(this.kylo_name, this.kylo_image, "HP " + Math.abs(this.kylo_hp));
+        $("#darth_vader").empty().append(this.vader_name, this.vader_image, "HP " + Math.abs(this.vader_hp));
 
         //What happens if you die
 
@@ -326,18 +328,33 @@ var sW = {
             //What happens if you defeat all enemies
             
             if ( this.wins_array.length == 4 ) {
-            $("#winText").text("You won the game! There are no more enemies. Press restart to play again.");
             $("#statistics1, #statistics2").text("");
+            $("#winText").text("You won the game! There are no more enemies. Press restart to play again.").css("font-size", "24px").css("border-radius", "10px").css("margin-bottom", "40px").css("padding", "10px");
+
+            if ( this.hero_array[0] == true ) {
+                $("#winText").css("border", "1px solid forestgreen").css("box-shadow", "0px 0px 40px forestgreen");
+            } else if ( this.hero_array[1] == true ) {
+                $("#winText").css("border", "1px solid darkblue").css("box-shadow", "0px 0px 40px darkblue");
+            } else if ( this.hero_array[2] == true ) {
+                $("#winText").css("border", "1px solid purple").css("box-shadow", "0px 0px 40px purple");
+            } else if ( this.hero_array[3] == true ) {
+                $("#winText").css("border", "1px solid crimson").css("box-shadow", "0px 0px 40px crimson");
+            } else if ( this.hero_array[4] == true ) {
+                $("#winText").css("border", "1px solid darkred").css("box-shadow", "0px 0px 40px darkred");
+            }
+            
             }
         }
 
-    
         //This increases your attack power.
         this.attack_array[this.hero_array.indexOf(true)] = this.attack_array[this.hero_array.indexOf(true)] + this.attack_increment[this.hero_array.indexOf(true)];
 
     },
 
     resetGame: function() {
+
+        $("html, body").animate({scrollTop:0}, "slow");
+
         //Yoda Attributes
         this.yoda_hp = 95;
         this.yoda_attack = 4;
@@ -385,7 +402,7 @@ var sW = {
         //Reset the text and button displays
         $("#your-character, #enemy-characters, #fight, #attack, #btn-reset, #charTitle4").animate({opacity: 0, duration: 1000});
         $("#charTitle1").slideDown();
-        $("#winText").text("");
+        $("#winText").text("").css("border", "none").css("box-shadow", "none").css("font-size", "16px");
 
         //Reset all Arrays as they are on game Setup
         this.hero_array.splice(0,5);
@@ -486,6 +503,7 @@ $("#attack").click(function() {
 $("#btn-reset").click(function() {
 
     sW.resetGame();
+    
 
 })
 

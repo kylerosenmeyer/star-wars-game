@@ -2,10 +2,15 @@ body {
     margin: auto;
     text-align: center;
     padding: 50px;
+    background-image: url("..//images/starwars_background.jpg");
+    background-size: cover;
+    color: whitesmoke;
+    font-family: 'Oswald', sans-serif;
+
 }
 
 h1 {
-    padding: 50px;
+    padding: 10px;
     margin-bottom: 25px;
 }
 
@@ -16,14 +21,32 @@ h1 {
     padding: auto;
 }
 
+#yoda_img {
+    margin: 25% auto 37%;
+}
+
+#obi_img {
+    margin: 20% auto 19%;
+}
+
+#kylo_img {
+    margin: 45% auto 41.5%;
+}
+
+#vader_img {
+    margin: 15% auto 15.5%;
+}
+
 #yoda {
     border: 2px solid forestgreen;
     height: 200px;
     width: 200px;
     padding-bottom: 310px;
     margin: 0px 5px 10px;
-    box-shadow: 0px 0px 20px forestgreen;
-    
+    box-shadow: 0px 0px 60px forestgreen;
+    background-color: black;
+    opacity: 0.85;
+    color: whitesmoke;
 }
 
 #rey {
@@ -32,7 +55,10 @@ h1 {
     width: 200px;
     padding-bottom: 310px;
     margin: 0px 5px 10px;
-    box-shadow: 0px 0px 20px darkblue;
+    box-shadow: 0px 0px 60px blue;
+    background-color: black;
+    opacity: 0.85;
+    color: whitesmoke;
 }
 
 #obi_wan {
@@ -41,7 +67,10 @@ h1 {
     width: 200px;
     padding-bottom: 310px;
     margin: 0px 5px 10px;
-    box-shadow: 0px 0px 20px purple;
+    box-shadow: 0px 0px 60px purple;
+    background-color: black;
+    opacity: 0.85;
+    color: whitesmoke;
 }
 
 #kylo_ren {
@@ -50,7 +79,10 @@ h1 {
     width: 200px;
     padding-bottom: 310px;
     margin: 0px 5px 10px;
-    box-shadow: 0px 0px 20px crimson;
+    box-shadow: 0px 0px 60px crimson;
+    background-color: black;
+    opacity: 0.85;
+    color: whitesmoke;
 }
 
 #darth_vader {
@@ -59,7 +91,10 @@ h1 {
     width: 200px;
     padding-bottom: 310px;
     margin: 0px 5px 10px;
-    box-shadow: 0px 0px 20px darkred;
+    box-shadow: 0px 0px 60px darkred;
+    background-color: black;
+    opacity: 0.85;
+    color: whitesmoke;
 }
 
 #charTitle1 {
@@ -120,3 +155,4 @@ h1 {
     padding: 20px 40px;
     margin-bottom: 50px;
 }
+
