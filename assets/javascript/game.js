@@ -329,7 +329,7 @@ var sW = {
             
             if ( this.wins_array.length == 4 ) {
             $("#statistics1, #statistics2").text("");
-            $("#winText").text("You won the game! There are no more enemies. Press restart to play again.").css("font-size", "24px").css("border-radius", "10px").css("margin-bottom", "40px").css("padding", "10px");
+            $("#winText").text("You won the game! There are no more enemies. Press restart to play again.").css("font-size", "24px").css("margin-bottom", "40px").css("padding", "10px");
 
             if ( this.hero_array[0] == true ) {
                 $("#winText").css("border", "1px solid forestgreen").css("box-shadow", "0px 0px 40px forestgreen");
@@ -356,7 +356,7 @@ var sW = {
         $("html, body").animate({scrollTop:0}, "slow");
 
         //Yoda Attributes
-        this.yoda_hp = 95;
+        this.yoda_hp = 98;
         this.yoda_attack = 4;
         this.yoda_hero = false;
         this.yoda_villain = false;
@@ -374,13 +374,13 @@ var sW = {
         this.obi_villain = false;
 
         //Kylo Ren Attributes
-        this.kylo_hp = 94;
+        this.kylo_hp = 96;
         this.kylo_attack = 4.5;
         this.kylo_hero = false;
         this.kylo_villain = false;
 
         //Darth Vader Attributes
-        this.vader_hp = 100;
+        this.vader_hp = 90;
         this.vader_attack = 5;
         this.vader_hero = false;
         this.vader_villain = false;
