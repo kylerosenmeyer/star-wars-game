@@ -233,7 +233,12 @@ var sW = {
     },
 
     attack: function() {
-        $("html, body").animate({scrollTop:500}, "slow");
+
+        //Show fight statistics
+        $("#statistics1, #statistics2").animate({opacity: 1});
+
+        //force the page to scroll down to the fight section, whether on mobile or desktop
+        $("html, body").animate({scrollTop:1500}, "slow");
 
         //The first half of the attack subracts your attack from the villain's life, and reports the results
         this.hp_array[this.villain_array.indexOf(true)] = this.hp_array[this.villain_array.indexOf(true)] - this.attack_array[this.hero_array.indexOf(true)];
@@ -332,15 +337,15 @@ var sW = {
             $("#winText").text("You won the game! There are no more enemies. Press restart to play again.").css("font-size", "24px").css("margin-bottom", "40px").css("padding", "10px");
 
             if ( this.hero_array[0] == true ) {
-                $("#winText").css("border", "1px solid forestgreen").css("box-shadow", "0px 0px 40px forestgreen");
+                $("#winText").css("border", "1px solid forestgreen").css("box-shadow", "0px 0px 80px forestgreen");
             } else if ( this.hero_array[1] == true ) {
-                $("#winText").css("border", "1px solid darkblue").css("box-shadow", "0px 0px 40px darkblue");
+                $("#winText").css("border", "1px solid darkblue").css("box-shadow", "0px 0px 80px blue");
             } else if ( this.hero_array[2] == true ) {
-                $("#winText").css("border", "1px solid purple").css("box-shadow", "0px 0px 40px purple");
+                $("#winText").css("border", "1px solid purple").css("box-shadow", "0px 0px 80px purple");
             } else if ( this.hero_array[3] == true ) {
-                $("#winText").css("border", "1px solid crimson").css("box-shadow", "0px 0px 40px crimson");
+                $("#winText").css("border", "1px solid crimson").css("box-shadow", "0px 0px 80px crimson");
             } else if ( this.hero_array[4] == true ) {
-                $("#winText").css("border", "1px solid darkred").css("box-shadow", "0px 0px 40px darkred");
+                $("#winText").css("border", "1px solid darkred").css("box-shadow", "0px 0px 80px darkred");
             }
             
             }
@@ -393,15 +398,16 @@ var sW = {
         $("#darth_vader").detach().appendTo("#choose-character");
 
         //Reset the display of the cards
-        $("#yoda").empty().append(this.yoda_name, this.yoda_image, this.yoda_hp).slideDown("slow");
-        $("#rey").empty().append(this.rey_name, this.rey_image, this.rey_hp).slideDown("slow");
-        $("#obi_wan").empty().append(this.obi_name, this.obi_image, this.obi_hp).slideDown("slow");
-        $("#kylo_ren").empty().append(this.kylo_name, this.kylo_image, this.kylo_hp).slideDown("slow");
-        $("#darth_vader").empty().append(this.vader_name, this.vader_image, this.vader_hp).slideDown("slow");
+        $("#yoda").empty().append(this.yoda_name, this.yoda_image,"HP " + this.yoda_hp).slideDown("slow");
+        $("#rey").empty().append(this.rey_name, this.rey_image,"HP " + this.rey_hp).slideDown("slow");
+        $("#obi_wan").empty().append(this.obi_name, this.obi_image,"HP " + this.obi_hp).slideDown("slow");
+        $("#kylo_ren").empty().append(this.kylo_name, this.kylo_image,"HP " + this.kylo_hp).slideDown("slow");
+        $("#darth_vader").empty().append(this.vader_name, this.vader_image,"HP " + this.vader_hp).slideDown("slow");
 
         //Reset the text and button displays
-        $("#your-character, #enemy-characters, #fight, #attack, #btn-reset, #charTitle4").animate({opacity: 0, duration: 1000});
+        $("#your-character, #enemy-characters, #fight, #attack, #btn-reset, #charTitle4, #statistics1, #statistics2").animate({opacity: 0, duration: 1000});
         $("#charTitle1").slideDown();
+        $("#charTitle2").text("Enemy Characters:");
         $("#winText").text("").css("border", "none").css("box-shadow", "none").css("font-size", "16px");
 
         //Reset all Arrays as they are on game Setup
@@ -415,6 +421,22 @@ var sW = {
         this.character_array.push(this.yoda_name, this.rey_name, this.obi_name, this.kylo_name, this.vader_name)
         this.hp_array.push(this.yoda_hp, this.rey_hp, this.obi_hp, this.kylo_hp, this.vader_hp);
         this.attack_array.push(this.yoda_attack, this.rey_attack, this.obi_attack, this.kylo_attack, this.vader_attack)
+    },
+
+    buttonDown: function() {
+        $("#attack").css("border-style", "inset");
+    },
+
+    buttonUp: function() {
+        $("#attack").css("border-style", "outset");
+    },
+
+    buttonDown2: function() {
+        $("#btn-reset").css("border-style", "inset");
+    },
+
+    buttonUp2: function() {
+        $("#btn-reset").css("border-style", "outset");
     },
 
 
@@ -504,9 +526,33 @@ $("#btn-reset").click(function() {
 
     sW.resetGame();
     
+});
 
-})
+//This animates the attack button
+$("#attack").mousedown(function() {
 
+    sW.buttonDown();
+
+});
+
+$("#attack").mouseup(function() {
+
+    sW.buttonUp();
+
+});
+
+//This animates the reset button
+$("#btn-reset").mousedown(function() {
+
+    sW.buttonDown2();
+
+});
+
+$("#btn-reset").mouseup(function() {
+
+    sW.buttonUp2();
+
+});
 
 
 
