@@ -1,3 +1,5 @@
+/*Tag Styling*/
+
 body {
     margin: auto;
     text-align: center;
@@ -14,6 +16,8 @@ h1 {
     margin-bottom: 25px;
 }
 
+/*Class Styling*/
+
 .char_img {
     display: block;
     width: 80%;
@@ -21,9 +25,13 @@ h1 {
     padding: auto;
 }
 
+/*Psuedo  Styling*/
+
 button:focus {
     outline: none;
 }
+
+/*ID Styling*/
 
 #yoda_img {
     margin: 25% auto 37%;
@@ -40,6 +48,8 @@ button:focus {
 #vader_img {
     margin: 15% auto 15.5%;
 }
+
+/*Character Styling - Each Card is given a glow using a colored box shadow! */
 
 #yoda {
     border: 2px solid forestgreen;
@@ -149,6 +159,8 @@ button:focus {
     margin-top: 50px;
 }
 
+/* Button ID Styling */
+
 #attack {
     opacity: 0;
     padding: 20px 60px;
@@ -162,6 +174,7 @@ button:focus {
     color: whitesmoke;
     font-family: 'Oswald', sans-serif;
 }
+
 #btn-reset {
     opacity: 0;
     padding: 20px 40px;

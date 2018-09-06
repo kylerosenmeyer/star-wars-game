@@ -1,7 +1,7 @@
 # star-wars-game
 Coding Bootcamp HW4 by Kyle Rosenmeyer
 
-**Star Wars Battle** is a --
+**Star Wars Battle** is a fighting strategy game in which the user attempts to defeat 4 enemy players with their chosen player. The user will find that randomly selecting opponets will not always lead to winning.
 
 This game is useful to learn the principals of javascript *objects*. This game is coded as an object.
 
