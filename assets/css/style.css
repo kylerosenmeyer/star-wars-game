@@ -32,6 +32,12 @@ h5 {
     font-size: 24px;
 }
 
+footer {
+    margin: 20px 0px;
+    text-align: center;
+    z-index: -1;
+}
+
 /*Class Styling*/
 
 .char_img {
@@ -94,13 +100,13 @@ button:focus {
 }
 
 #winText {
-    font-size: 24px;
+    font-size: 26px;
     padding: 20px;
 }
 
 /* Button ID Styling */
 
-.fight {
+.gameBtn {
     width: 150px;
     height: 75px;
     padding-bottom: 0px;
@@ -150,7 +156,7 @@ button:focus {
         padding-bottom: 175px;
     }
 
-    button.fight {
+    button.gameBtn {
         height: 50px;
         width: 100px;
         margin-bottom: 10px;
