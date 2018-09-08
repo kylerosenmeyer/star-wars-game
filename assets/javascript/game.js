@@ -107,8 +107,8 @@ var sW = {
     //Hero functions run the logic on the selection of the user's player, marking that player as the hero.
     //Choosing a hero will run some repetitive code, and some customized code. First define the function for the repetitive code:
     chooseChar: function() {
-        $(".row-2, .row-3, .row-4").slideDown("slow");
-        $("#charTitle1").slideUp("fast");
+        $(".row-2, .row-3, .row-4").slideDown(1500);
+        $("#charTitle1").slideUp(1500);
         //After choosing a hero, fill the hero array with booleans for the game to later recognize which character you are.
         this.hero_array.push(this.yoda_hero, this.rey_hero, this.obi_hero, this.kylo_hero, this.vader_hero);
     },
@@ -174,10 +174,10 @@ var sW = {
 
         //After choosing a villain, move the villain card down to the fight section, and bring up the remaining buttons/text for the fight stage.
         this.villain_array.push(this.yoda_villain, this.rey_villain, this.obi_villain, this.kylo_villain, this.vader_villain);
-        $("#attack").slideDown();
-        $("#winText, #statistics1, #statistics2").text("");
+        $("#attack, #charTitle4, #statistics1, #statistics2, #winText").slideDown(1500);
+        $("#winText, #statistics1, #statistics2").text(" ");
         //scroll down to the fight section
-        $("html, body").animate({scrollTop: $("#charTitle4").offset().top }, "slow");
+        $("html, body").animate({scrollTop: $("#charTitle4").offset().top }, 3100);
     },
 
     fightYoda: function() {
@@ -187,7 +187,7 @@ var sW = {
         if ( (this.yoda_hero == false) && (this.yoda_villain == false) && (this.rey_villain == false) && (this.obi_villain == false) && (this.kylo_villain == false) && (this.vader_villain == false) ) {
             this.yoda_villain = true;
 
-            $("#yoda").detach().slideUp().appendTo("#defender").slideDown();
+            $("#yoda").detach().slideUp().appendTo("#defender").slideDown(1500);
             this.chooseVil();
             
         }
@@ -198,7 +198,7 @@ var sW = {
         if ( (this.rey_hero == false) && (this.rey_villain == false) && (this.yoda_villain == false) && (this.obi_villain == false) && (this.kylo_villain == false) && (this.vader_villain == false) ) {
             this.rey_villain = true;
 
-            $("#rey").detach().slideUp().appendTo("#defender").slideDown();
+            $("#rey").detach().slideUp().appendTo("#defender").slideDown(1500);
             this.chooseVil();
         }
 
@@ -209,7 +209,7 @@ var sW = {
         if ( (this.obi_hero == false) && (this.obi_villain == false) && (this.yoda_villain == false) && (this.rey_villain == false) && (this.kylo_villain == false) && (this.vader_villain == false) ) {
             this.obi_villain = true;
 
-            $("#obi_wan").detach().slideUp().appendTo("#defender").slideDown();
+            $("#obi_wan").detach().slideUp().appendTo("#defender").slideDown(1500);
             this.chooseVil();
         }
 
@@ -220,7 +220,7 @@ var sW = {
         if ( (this.kylo_hero == false) && (this.kylo_villain == false) && (this.yoda_villain == false) && (this.rey_villain == false) && (this.obi_villain == false) && (this.vader_villain == false) ) {
             this.kylo_villain = true;
 
-            $("#kylo_ren").detach().slideUp().appendTo("#defender").slideDown();
+            $("#kylo_ren").detach().slideUp().appendTo("#defender").slideDown(1500);
             this.chooseVil();
         }
 
@@ -231,7 +231,7 @@ var sW = {
         if ( (this.vader_hero == false) && (this.vader_villain == false) && (this.yoda_villain == false) && (this.rey_villain == false) && (this.obi_villain == false) && (this.kylo_villain == false) ) {
             this.vader_villain = true;
 
-            $("#darth_vader").detach().slideUp().appendTo("#defender").slideDown();
+            $("#darth_vader").detach().slideUp().appendTo("#defender").slideDown(1500);
             this.chooseVil();
         }
     },
@@ -240,17 +240,15 @@ var sW = {
     //There is some repetitive code to Villain Death section, which is defined first here with a function.
 
     vilDeath: function() {
-            
-        $("#statistics1, #statistics2").text("");
+        
+        $("#attack, #charTitle4").slideUp(1600);
+        $("#statistics1, #statistics2").text(" ");
         //scroll back up to enemy characters
-        $("html, body").delay(1500).animate({scrollTop: $("#charTitle2").offset().top }, "slow");
-
+        $("html, body").animate({scrollTop: $("#charTitle2").offset().top }, 1500);
+        
     },
 
     attack: function() {
-
-        //Show fight statistics
-        $("#statistics1, #statistics2").slideDown("fast");
 
         //The first half of the attack subracts your attack from the villain's life, and reports the results
         this.hp_array[this.villain_array.indexOf(true)] = this.hp_array[this.villain_array.indexOf(true)] - this.attack_array[this.hero_array.indexOf(true)];
@@ -261,7 +259,7 @@ var sW = {
         $("#statistics2").text("You got hit by " + this.character_array[this.villain_array.indexOf(true)] + " for " + this.counter_array[this.villain_array.indexOf(true)] + " points!")
 
         // update the health and attack stats of the character cards
-
+        
         this.yoda_hp = this.hp_array[0];
         this.yoda_attack = this.attack_array[0]
 
@@ -290,9 +288,9 @@ var sW = {
         
         if ( this.hp_array[this.hero_array.indexOf(true)] <= 0 ) {
 
-            $("#attack").slideUp("fast");
+            $("#attack, .hero").slideUp(1500);
             $("#winText").text("You were defeated! Press restart to play again.");
-            $("#statistics1, #statistics2").text("").slideUp("slow");
+            $("#statistics1, #statistics2").text("").slideUp(1500);
 
         //This if statement tracks the defender's life and stops the battle if the defender's health drops below zero. 
         //It also unlocks the remaining enemy characters to choose for the next battle.
@@ -302,7 +300,7 @@ var sW = {
         } else if ( this.hp_array[this.villain_array.indexOf(true)] <= 0 ) {
 
             if ( this.villain_array.indexOf(true) == 0 ) {
-                $("#yoda").slideUp("slow");
+                $("#yoda").slideUp(1500);
                 this.villain_array.splice(0,5);
                 this.yoda_villain = false;
                 $("#winText").text("You defeated" + this.yoda_name + "! Select another enemy.");
@@ -311,7 +309,7 @@ var sW = {
 
             } else if ( this.villain_array.indexOf(true) == 1 ) {
 
-                $("#rey").slideUp("slow");
+                $("#rey").slideUp(1500);
                 this.villain_array.splice(0,5);
                 this.rey_villain = false;
                 $("#winText").text("You defeated" + this.rey_name + "! Select another enemy.");
@@ -320,7 +318,7 @@ var sW = {
 
             } else if ( this.villain_array.indexOf(true) == 2 ) {
 
-                $("#obi_wan").slideUp("slow");
+                $("#obi_wan").slideUp(1500);
                 this.villain_array.splice(0,5);
                 this.obi_villain = false;
                 $("#winText").text("You defeated" + this.obi_name + "! Select another enemy.");
@@ -329,7 +327,7 @@ var sW = {
 
             } else if ( this.villain_array.indexOf(true) == 3 ) {
 
-                $("#kylo_ren").slideUp("slow");
+                $("#kylo_ren").slideUp(1500);
                 this.villain_array.splice(0,5);
                 this.kylo_villain = false;
                 $("#winText").text("You defeated" + this.kylo_name + "! Select another enemy.");
@@ -338,16 +336,13 @@ var sW = {
 
             } else if ( this.villain_array.indexOf(true) == 4 ) {
 
-                $("#darth_vader").slideUp("slow");
+                $("#darth_vader").slideUp(1500);
                 this.villain_array.splice(0,5);
                 this.vader_villain = false;
                 $("#winText").text("You defeated" + this.vader_name + "! Select another enemy.");
                 this.wins_array.push("defeated Darth Vader");
                 this.vilDeath();
             }
-
-            // Hide the attack button
-            $("#attack").slideUp("fast");
 
             //Change the title for the final battle
             
@@ -359,7 +354,7 @@ var sW = {
             //It displays a custom styled message box based on the hero you win with.
             
             if ( this.wins_array.length == 4 ) {
-            $("#statistics1, #statistics2").text("").slideUp("fast");
+            $("#statistics1, #statistics2").text("").slideUp(1500);
             $("#winText").text("You won the game! There are no more enemies. Press restart to play again.");
 
                 if ( this.hero_array[0] == true ) {
@@ -380,7 +375,7 @@ var sW = {
     resetGame: function() {
 
         //Scroll the page back to the top
-        $("html, body").animate({scrollTop:0}, "slow");
+        $("html, body").animate({scrollTop:0}, 1500);
 
         //Yoda Attributes
         this.yoda_hp = 98;
@@ -427,8 +422,8 @@ var sW = {
         $("#darth_vader").empty().append(this.vader_name, this.vader_image,"HP " + this.vader_hp).slideDown("slow").removeClass("villain hero").addClass("hero");
 
         //Reset the text and button displays
-        $(".row-2, .row-3, .row-4").slideUp("slow");
-        $("#charTitle1").slideDown("slow");
+        $(".row-2, .row-3, .row-4, #attack").slideUp(1500);
+        $("#charTitle1").slideDown(1500);
         $("#charTitle2").text("Enemy Characters:");
         $("#winText").text("").css("border", "none").css("box-shadow", "none");
 
